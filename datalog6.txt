@@ -1,7 +1,0 @@
-% EDB
-Parent('Bob','John').
-Parent('John','Alex').
-Parent('Alex','Tom').
-% IDB
-Ancestor(x,y):- Parent(x,y).
-Ancestor(x,y):- Parent(x,z),Ancestor(z,y).

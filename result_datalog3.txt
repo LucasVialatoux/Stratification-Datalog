@@ -1,8 +1,0 @@
-P1 = {
-	Multiple(x) :- Computer(cID,name,2).
-	Hp(x) :- Computer(id,x,s).
-	Asus(y) :- Computer(id2,y,s2).
-}
-P2 = {
-	Singlescreen(x) :- Hp(x), not Multiple(x).
-}

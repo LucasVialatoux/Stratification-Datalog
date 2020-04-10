@@ -1,7 +1,0 @@
-P1 = {
-	Reach(x):-Source(x).
-	Reach(x):-Reach(y),Arc(y,x).
-}
-P2 = {
-	NoReach(x):-Target(x), not Reach(x).
-}
