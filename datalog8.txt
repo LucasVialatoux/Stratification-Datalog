@@ -1,0 +1,12 @@
+% EDB
+Arc(1,3).
+Arc(3,1).
+Arc(1,2).
+Arc(1,4).
+Source(1).
+Target(2).
+Target(3).
+% IDB
+Reach(x):-Source(x).
+Reach(x):-Reach(y),Arc(y,x).
+NoReach(x):-Target(x), not Reach(x).

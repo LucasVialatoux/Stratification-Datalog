@@ -1,0 +1,9 @@
+% EDB
+Parent('Bob','John').
+Parent('John','Alex').
+Parent('Alex','Tom').
+Parent('Tom','Billy').
+Parent('Billy','Kid').
+% IDB
+Ancestor(x,y):- Parent(x,y).
+Ancestor(x,y):- Parent(x,z),Ancestor(z,y).
