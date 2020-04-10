@@ -1,26 +1,26 @@
-#### Syntax constraint for datalog.txt
+# Syntax constraint for datalog.txt
 
-##Declaration of the EDB relation :
+### Declaration of the EDB relation :
 
 - Begin with %EDB
 - One relation per line
 
-#Example :
+##### Example :
 
-%EDB
-relation1(_,_,_)
-relation2(_,_,_)
-...
+%EDB  
+relation1(x,x,x)  
+relation2(x,x,x)  
+...  
 
-##Declaration of the IDB rules :
+### Declaration of the IDB rules :
 
 - Begin with %IDB
 - One rule per line
 - `:-` to separate head and tail
 
-#Example :
+##### Example :
 
-% IDB
-rule1() :- p(_,_),q(_,_)
-rule2(_) :- p(_,_),q(_,_)
-...
+% IDB  
+rule1() :- p(x,x),q(x,x)  
+rule2(x) :- p(x,x),q(x,x)  
+...  
