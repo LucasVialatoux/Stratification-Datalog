@@ -1,12 +1,13 @@
 % EDB
-Arc(1,3).
-Arc(3,1).
-Arc(1,2).
-Arc(1,4).
-Source(1).
-Target(2).
-Target(3).
+F(1,2)
+C(1,2)
+C(1,’R’)
 % IDB
-Reach(x):-Source(x).
-Reach(x):-Reach(y),Arc(y,x).
-NoReach(x):-Target(x), not Reach(x).
+S(x) :- P(x,x), not R(x,x).
+R(x,y) :- P(x,y), C(x,'R').
+R(x,y) :- P(x,y), C(y,'R').
+P(x,y) :- F(x,y).
+P(x,z) :- P(x,y), F(y,z).
+A(x) :- P(x,x), not S(x).
+A(x) :- F(x,x), not S(x).
+Z(x) :- not A(x,x).

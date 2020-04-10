@@ -1,0 +1,4 @@
+P1 = {
+	Ancestor(x,y):- Parent(x,y).
+	Ancestor(x,y):- Parent(x,z),Ancestor(z,y).
+}

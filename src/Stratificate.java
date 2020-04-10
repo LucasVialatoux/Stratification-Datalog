@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Stratificate {
 
@@ -56,7 +55,7 @@ public class Stratificate {
         }
     }
 
-    public void solve(String out) {
+    public void solve() {
         Map<String, Integer> stratum = new HashMap<>();
         Map<String, Integer> previousStratum = new HashMap<>(stratum);
 
@@ -69,28 +68,33 @@ public class Stratificate {
         }
 
         int maxStratum=0;
-        while (maxStratum<idbs.size() && !previousStratum.equals(stratum)) {
+        try {
+            while (maxStratum < idbs.size() && !previousStratum.equals(stratum)) {
+                //use to check if stratum changed or not
+                previousStratum = new HashMap<>(stratum);
 
-            //use to check if stratum changed or not
-            previousStratum = new HashMap<>(stratum);
-
-            //stratificiation algorithm
-            for (IDB idb : idbs) {
-                for(Map.Entry<String,Boolean> entry : idb.getTails().entrySet()){
-                    int newStrat;
-                    if(entry.getValue()){
-                        newStrat = (stratum.get(idb.getHead())>1+stratum.get(entry.getKey()))?stratum.get(idb.getHead()):1+stratum.get(entry.getKey());
+                //stratificiation algorithm
+                for (IDB idb : idbs) {
+                    for (Map.Entry<String, Boolean> entry : idb.getTails().entrySet()) {
+                        int newStrat;
+                        if (entry.getValue()) {
+                            newStrat = (stratum.get(idb.getHead()) > 1 + stratum.get(entry.getKey())) ? stratum.get(idb.getHead()) : 1 + stratum.get(entry.getKey());
+                        } else {
+                            newStrat = (stratum.get(idb.getHead()) > stratum.get(entry.getKey())) ? stratum.get(idb.getHead()) : stratum.get(entry.getKey());
+                        }
+                        stratum.replace(idb.getHead(), newStrat);
                     }
-                    else{
-                        newStrat = (stratum.get(idb.getHead())>stratum.get(entry.getKey()))?stratum.get(idb.getHead()):stratum.get(entry.getKey());
-                    }
-                    stratum.replace(idb.getHead(), newStrat);
                 }
-            }
 
-            //get max stratum for stopping condition
-            Map.Entry<String, Integer> maxEntry = Collections.max(stratum.entrySet(), Map.Entry.comparingByValue());
-            maxStratum = maxEntry.getValue();
+                //get max stratum for stopping condition
+                Map.Entry<String, Integer> maxEntry = Collections.max(stratum.entrySet(), Map.Entry.comparingByValue());
+                maxStratum = maxEntry.getValue();
+            }
+        }
+        catch (NullPointerException e){
+            System.out.println("Rule or relation inexistant.");
+            System.out.println("Check your IDB and EDB.");
+            System.exit(-1);
         }
 
         //cleaning to have only the rules
@@ -101,7 +105,7 @@ public class Stratificate {
         //writing to file
         BufferedWriter writer = null;
         try {
-            writer = new BufferedWriter(new FileWriter(out));
+            writer = new BufferedWriter(new FileWriter(this.out));
             int i = 1;
             while(i<=maxStratum){
                 writer.write("P"+i+" = {");
@@ -111,9 +115,9 @@ public class Stratificate {
                         for(IDB rules : idbs){
                             if(rules.getHead().equals(entry.getKey())){
                                 writer.write("\t"+rules.getCompleteRule());
+                                writer.newLine();
                             }
                         }
-                        writer.newLine();
                     }
                 }
                 writer.write("}");

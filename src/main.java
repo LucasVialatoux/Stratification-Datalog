@@ -2,8 +2,8 @@ import java.io.File;
 
 public class main {
 
-    static String path = "datalog.txt";
-    static String out = "result.txt";
+    static String path = "datalog8.txt";
+    static String out = "result_"+path;
 
     public static void main(String[] args){
         File entryFile = new File(path);
@@ -12,7 +12,8 @@ public class main {
             System.exit(-1);
         }
         Stratificate problem = new Stratificate(entryFile, out);
-        problem.printData();
-        problem.solve(out);
+        //uncomment to print parsed data
+        //problem.printData();
+        problem.solve();
     }
 }
