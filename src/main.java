@@ -7,12 +7,12 @@ public class main {
     static String out = "result_"+in;
 
     public static void main(String[] args){
-        File entryFile = new File(path+"in/"+in);
+        File entryFile = new File(path+"input/"+in);
         if(!entryFile.exists()) {
             System.out.println("Fichier datalog introuvable");
             System.exit(-1);
         }
-        Stratificate problem = new Stratificate(entryFile, path+"out/"+out);
+        Stratificate problem = new Stratificate(entryFile, path+"results/"+out);
         //uncomment to print parsed data
         //problem.printData();
         problem.solve();

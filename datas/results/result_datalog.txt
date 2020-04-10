@@ -1,0 +1,8 @@
+P1 = {
+	Husband(x) :- Man(x),Married(x).
+	Married(x) :- Person(id,x,s,1).
+	Man(x) :- Person(id,x,'M',m).
+}
+P2 = {
+	Singleman(x) :- Man(x),not Husband(x).
+}

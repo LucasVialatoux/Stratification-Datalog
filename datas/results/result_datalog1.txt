@@ -1,0 +1,12 @@
+P1 = {
+	P(x,y) :- F(x,y).
+	P(x,z) :- P(x,y), F(y,z).
+	R(x,y) :- P(x,y), C(x,'R').
+	R(x,y) :- P(x,y), C(y,'R').
+}
+P2 = {
+	S(x) :- P(x,x), not R(x,x).
+}
+P3 = {
+	A(X) :- P(x,x), not S(x).
+}
