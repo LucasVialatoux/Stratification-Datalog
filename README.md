@@ -1,3 +1,9 @@
+# How to use
+
+- Create a file named `datalog.txt`
+- Launch a terminal and execute the StratificationModule.jar in the same directory as the datalog.txt
+- Result will be writen in a `result.txt` file
+
 # Syntax constraint for datalog.txt
 
 ### Declaration of the EDB relation :
