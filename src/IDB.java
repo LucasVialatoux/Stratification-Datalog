@@ -6,10 +6,12 @@ public class IDB {
 
     private String head;
     private Map<String,Boolean> tails;
+    private String completeRule;
 
     public IDB(String idb){
 
         try{
+            this.completeRule = idb;
             this.head = idb.split(":-")[0].split("\\(")[0];
             this.tails = new HashMap<>();
             String tail = idb.split(":-")[1];
@@ -57,5 +59,13 @@ public class IDB {
         for(Map.Entry<String,Boolean> entry : tails.entrySet()){
             System.out.println(entry.getKey() + " (" + entry.getValue()+")");
         }
+    }
+
+    public String getCompleteRule() {
+        return completeRule;
+    }
+
+    public void setCompleteRule(String completeRule) {
+        this.completeRule = completeRule;
     }
 }
