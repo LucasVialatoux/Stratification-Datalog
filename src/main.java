@@ -3,7 +3,7 @@ import java.io.File;
 public class main {
 
     static String path = "./datas/";
-    static String in = "datalog.txt";
+    static String in = "error2.txt";
     static String out = "result_"+in;
 
     public static void main(String[] args){

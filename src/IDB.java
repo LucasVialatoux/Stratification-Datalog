@@ -5,36 +5,34 @@ import java.util.Map;
 public class IDB {
 
     private String head;
-    private Map<String,Boolean> tails;
+    private Map<String, Boolean> tails;
     private String completeRule;
 
-    public IDB(String idb){
+    public IDB(String idb) {
 
-        try{
+        try {
             this.completeRule = idb;
             this.head = idb.split(":-")[0].split("\\(")[0];
             this.tails = new HashMap<>();
             String tail = idb.split(":-")[1];
-            if(!tail.equals("")){
-                String[] tailSplit = tail.split("\\),");
-                for(String s : tailSplit){
-                    s = s.split("\\(")[0];
-                    s = s.replace(" ","");
-                    if(s.contains("not"))
-                        addToTail(s.replace("not",""),true);
-                    else{
-                        addToTail(s,false);
-                    }
+            String[] tailSplit = tail.split("\\),");
+            for (String s : tailSplit) {
+                s = s.split("\\(")[0];
+                s = s.replace(" ", "");
+                if (s.contains("not"))
+                    addToTail(s.replace("not", ""), true);
+                else {
+                    addToTail(s, false);
                 }
             }
-        }
-        catch (ArrayIndexOutOfBoundsException e){
-            System.out.println("Incorrect IDB rule");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Incorrect IDB rule : " + idb);
+            System.exit(-1);
         }
     }
 
-    public void addToTail(String name, boolean isNegated){
-        tails.put(name,isNegated);
+    public void addToTail(String name, boolean isNegated) {
+        tails.put(name, isNegated);
     }
 
     public String getHead() {
@@ -53,11 +51,11 @@ public class IDB {
         this.tails = tails;
     }
 
-    public void printIDB(){
-        System.out.println("Head : " + head );
+    public void printIDB() {
+        System.out.println("Head : " + head);
         System.out.println("Tail : ");
-        for(Map.Entry<String,Boolean> entry : tails.entrySet()){
-            System.out.println(entry.getKey() + " (" + entry.getValue()+")");
+        for (Map.Entry<String, Boolean> entry : tails.entrySet()) {
+            System.out.println(entry.getKey() + " (" + entry.getValue() + ")");
         }
     }
 
